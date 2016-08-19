@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "start": "electron app",
+    "setup": "npm install && (cd app && npm run setup)",
+    "build": "build"
+  },
+  "private": true,
+  "devDependencies": {
+    "electron-builder": "^5.26.0",
+    "electron-prebuilt": "^1.3.3"
+  },
+  "build": {
+    "appId": "com.nathanbuchar.hoodline-mini",
+    "category": "public.app-category.news",
+    "productName": "Hoodline Mini",
+    "compression": "store"
+  }
+}

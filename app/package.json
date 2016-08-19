@@ -1,0 +1,16 @@
+{
+  "name": "hoodline-mini",
+  "productName": "Hoodline Mini",
+  "version": "0.0.1",
+  "description": "MacOS menu bar notification app for Hoodline.",
+  "main": "main.js",
+  "scripts": {
+    "setup": "npm install"
+  },
+  "author": "Nathan Buchar <hello@nathanbuchar.com>",
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "electron-settings": "^2.1.1"
+  }
+}
