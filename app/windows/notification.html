@@ -1,0 +1,16 @@
+<script>
+  const { ipcRenderer } = require('electron');
+  const { shell } = require('electron');
+
+  ipcRenderer.on('notify', (evt, { title, body, link }) => {
+    const notification = new Notification(title, {
+      body,
+      silent: true
+    });
+
+    // Handle notification click.
+    notification.onclick = evt => {
+      shell.openExternal(link);
+    };
+  });
+</script>

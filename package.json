@@ -1,8 +1,9 @@
 {
   "scripts": {
     "start": "electron app",
-    "setup": "npm install && (cd app && npm run setup)",
-    "build": "build"
+    "setup": "npm install && npm run setup:app",
+    "setup:app": "(cd app && npm run setup)",
+    "build": "export CSC_NAME=\"Nathaniel Buchar (CAN92U6WU7)\" && build && open -a Finder ./dist/mac"
   },
   "private": true,
   "devDependencies": {
@@ -13,6 +14,9 @@
     "appId": "com.nathanbuchar.hoodline-mini",
     "category": "public.app-category.news",
     "productName": "Hoodline Mini",
-    "compression": "store"
+    "compression": "store",
+    "mac": {
+      "icon": "build/Icon.icns"
+    }
   }
 }

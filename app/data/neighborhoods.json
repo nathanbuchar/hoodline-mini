@@ -1,0 +1,310 @@
+[
+  {
+    "id": "all",
+    "type": "all",
+    "active": true,
+    "friendlyName": "All",
+    "feed": "http://hoodline.com/atom"
+  },
+  {
+    "id": "alamoSquare",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Alamo Square",
+    "feed": "http://hoodline.com/atom/alamo-square"
+  },
+  {
+    "id": "bayView",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Bayview",
+    "feed": "http://hoodline.com/atom/bayview"
+  },
+  {
+    "id": "castro",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Castro",
+    "feed": "http://hoodline.com/atom/castro"
+  },
+  {
+    "id": "chinatown",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Chinatown",
+    "feed": "http://hoodline.com/atom/chinatown"
+  },
+  {
+    "id": "civicCenter",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Civic Center",
+    "feed": "http://hoodline.com/atom/civic-center"
+  },
+  {
+    "id": "coleValley",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Cole Valley",
+    "feed": "http://hoodline.com/atom/cole-valley"
+  },
+  {
+    "id": "divisadero",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Divisadero",
+    "feed": "http://hoodline.com/atom/divisadero"
+  },
+  {
+    "id": "dogpatch",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Dogpatch",
+    "feed": "http://hoodline.com/atom/dogpatch"
+  },
+  {
+    "id": "duboceTriangle",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Duboce Triangle",
+    "feed": "http://hoodline.com/atom/duboce-triangle"
+  },
+  {
+    "id": "embarcadero",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Embarcadero",
+    "feed": "http://hoodline.com/atom/embarcadero"
+  },
+  {
+    "id": "fillmore",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Fillmore",
+    "feed": "http://hoodline.com/atom/fillmore"
+  },
+  {
+    "id": "financialDistrict",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Financial District",
+    "feed": "http://hoodline.com/atom/financial-district"
+  },
+  {
+    "id": "fishermansWharf",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Fisherman's Wharf",
+    "feed": "http://hoodline.com/atom/fishermans-wharf"
+  },
+  {
+    "id": "glenPark",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Glen Park",
+    "feed": "http://hoodline.com/atom/glen-park"
+  },
+  {
+    "id": "hayesValley",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Hayes Valley",
+    "feed": "http://hoodline.com/atom/hayes-valley"
+  },
+  {
+    "id": "ingleside",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Ingleside",
+    "feed": "http://hoodline.com/atom/ingleside"
+  },
+  {
+    "id": "innerRichmond",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Inner Richmond",
+    "feed": "http://hoodline.com/atom/inner-richmond"
+  },
+  {
+    "id": "innerSunset",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Inner Sunset",
+    "feed": "http://hoodline.com/atom/inner-sunset"
+  },
+  {
+    "id": "jacksonSquare",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Jackson Square",
+    "feed": "http://hoodline.com/atom/jackson-square"
+  },
+  {
+    "id": "lowerHaight",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Lower Haight",
+    "feed": "http://hoodline.com/atom/lower-haight"
+  },
+  {
+    "id": "lowerNobHill",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Lower Nob Hill",
+    "feed": "http://hoodline.com/atom/lower-nob-hill"
+  },
+  {
+    "id": "marina",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Marina",
+    "feed": "http://hoodline.com/atom/marina"
+  },
+  {
+    "id": "midMarket",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Mid-Market",
+    "feed": "http://hoodline.com/atom/mid-market"
+  },
+  {
+    "id": "mission",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Mission",
+    "feed": "http://hoodline.com/atom/mission"
+  },
+  {
+    "id": "nobHill",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Nob Hill",
+    "feed": "http://hoodline.com/atom/nob-hill"
+  },
+  {
+    "id": "noeValley",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Noe Valley",
+    "feed": "http://hoodline.com/atom/noe-valley"
+  },
+  {
+    "id": "noPa",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "NoPa",
+    "feed": "http://hoodline.com/atom/nopa"
+  },
+  {
+    "id": "northBeach",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "North Beach",
+    "feed": "http://hoodline.com/atom/north-beach"
+  },
+  {
+    "id": "oceanBeach",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Ocean Beach",
+    "feed": "http://hoodline.com/atom/ocean-beach"
+  },
+  {
+    "id": "outerRichmond",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Outer Richmond",
+    "feed": "http://hoodline.com/atom/outer-richmond"
+  },
+  {
+    "id": "outerSunset",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Outer Sunset",
+    "feed": "http://hoodline.com/atom/outer-sunset"
+  },
+  {
+    "id": "pacificHeights",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Pacific Heights",
+    "feed": "http://hoodline.com/atom/pacific-heights"
+  },
+  {
+    "id": "polk",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Polk",
+    "feed": "http://hoodline.com/atom/polk"
+  },
+  {
+    "id": "potreroHill",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Potrero Hill",
+    "feed": "http://hoodline.com/atom/potrero-hill"
+  },
+  {
+    "id": "russianHill",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Russian Hill",
+    "feed": "http://hoodline.com/atom/russian-hill"
+  },
+  {
+    "id": "soMa",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "SoMa",
+    "feed": "http://hoodline.com/atom/soma"
+  },
+  {
+    "id": "telegraphHill",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Telegraph Hill",
+    "feed": "http://hoodline.com/atom/telegraph-hill"
+  },
+  {
+    "id": "tenderloin",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Tenderloin",
+    "feed": "http://hoodline.com/atom/tenderloin"
+  },
+  {
+    "id": "twinPeaks",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Twin Peaks",
+    "feed": "http://hoodline.com/atom/twin-peaks"
+  },
+  {
+    "id": "unionSquare",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Union Square",
+    "feed": "http://hoodline.com/atom/union-square"
+  },
+  {
+    "id": "upperHaight",
+    "type": "neighborhood",
+    "active": true,
+    "friendlyName": "Upper Haight",
+    "feed": "http://hoodline.com/atom/upper-haight"
+  },
+  {
+    "id": "westPortal",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "West Portal",
+    "feed": "http://hoodline.com/atom/west-portal"
+  },
+  {
+    "id": "westernAddition",
+    "type": "neighborhood",
+    "active": false,
+    "friendlyName": "Western Addition",
+    "feed": "http://hoodline.com/atom/western-addition"
+  }
+]
