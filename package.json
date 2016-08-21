@@ -3,9 +3,7 @@
     "start": "electron app",
     "setup": "npm install && npm run setup:app",
     "setup:app": "(cd app && npm run setup)",
-    "webpack": "webpack --progress --colors",
-    "webpack:watch": "webpack --progress --watch --debug",
-    "build": "npm run webpack && export CSC_NAME=\"Nathaniel Buchar (CAN92U6WU7)\" && build && open -a Finder ./dist/mac"
+    "build": "export CSC_NAME=\"Nathaniel Buchar (CAN92U6WU7)\" && build && open -a Finder ./dist/mac"
   },
   "private": true,
   "devDependencies": {

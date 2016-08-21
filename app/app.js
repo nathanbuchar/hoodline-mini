@@ -74,6 +74,10 @@ class App {
 
     if (isDebugMode) {
       settings.setSync('debugMode', true);
+    } else {
+      if (settings.hasSync('debugMode')) {
+        settings.deleteSync('debugMode');
+      }
     }
   }
 
@@ -129,71 +133,75 @@ class App {
     const appVersion = app.getVersion();
     const _this = this;
 
-    const contextMenu = Menu.buildFromTemplate([
-      {
-        label: 'About Hoodline Mini',
-        click() {
-          _this._showAboutWindow();
-        }
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Preferences…',
-        click(menuItem) {
-          neighborhoods.forEach(n => {
-            _this._showPreferencesWindow();
-          });
-        }
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Debug',
-        type: 'submenu',
-        visible: this._isDebugMode(),
-        submenu: [
-          {
-            label: 'Open settings file…',
-            click() {
-              shell.openItem(settings.getSettingsFilePath());
-            }
-          },
-          {
-            label: 'Send test notification…',
-            click() {
-              notifier.notify({
-                title: 'Test',
-                body: 'This is a test notification.',
-                link: 'https://github.com/nathanbuchar/hoodline-mini'
-              });
-            }
+    const contextMenu = Menu.buildFromTemplate([].concat(
+      [
+        {
+          label: 'About Hoodline Mini',
+          click() {
+            _this._showAboutWindow();
           }
-        ]
-      },
-      {
-        type: 'separator',
-        visible: this._isDebugMode()
-      },
-      {
-        label: 'Open At Login',
-        type: 'checkbox',
-        checked: app.getLoginItemSettings().openAtLogin,
-        click(menuItem) {
-          app.setLoginItemSettings({
-            openAtLogin: menuItem.checked
-          });
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: 'Preferences…',
+          click(menuItem) {
+            neighborhoods.forEach(n => {
+              _this._showPreferencesWindow();
+            });
+          }
+        },
+        {
+          type: 'separator'
         }
-      },
-      {
-        label: 'Quit',
-        click() {
-          app.quit();
+      ],
+      this._isDebugMode() ? [
+        {
+          label: 'Debug',
+          type: 'submenu',
+          submenu: [
+            {
+              label: 'Open settings file…',
+              click() {
+                shell.openItem(settings.getSettingsFilePath());
+              }
+            },
+            {
+              label: 'Send test notification…',
+              click() {
+                notifier.notify({
+                  title: 'Test',
+                  body: 'This is a test notification.',
+                  link: 'https://github.com/nathanbuchar/hoodline-mini'
+                });
+              }
+            }
+          ]
+        },
+        {
+          type: 'separator'
         }
-      }
-    ]);
+      ] : [],
+      [
+        {
+          label: 'Open At Login',
+          type: 'checkbox',
+          checked: app.getLoginItemSettings().openAtLogin,
+          click(menuItem) {
+            app.setLoginItemSettings({
+              openAtLogin: menuItem.checked
+            });
+          }
+        },
+        {
+          label: 'Quit',
+          click() {
+            app.quit();
+          }
+        }
+      ]
+    ));
 
     tray.setToolTip(`${appName} (v${appVersion})`);
     tray.setContextMenu(contextMenu);
