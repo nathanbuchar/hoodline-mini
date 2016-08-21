@@ -273,18 +273,6 @@ class Feed {
   }
 
   /**
-   * Gets all active neighborhoods.
-   *
-   * @returns {Array}
-   * @private
-   */
-  _getActiveNeighborhoods() {
-    return neighborhoods.filter(neighborhood => {
-      return neighborhood.active;
-    });
-  }
-
-  /**
    * Gets the published date from a given story.
    *
    * @param {Object} story
