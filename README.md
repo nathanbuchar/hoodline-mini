@@ -1,7 +1,8 @@
-Hoodline Mini
-=============
+![](./docs/images/Banner.png)
 
-MacOS menu bar notification app for Hoodline.
+### Hoodline Mini
+
+MacOS menu bar notification app for Hoodline built on [Electron](https://electron.atom.io/).
 
 ***
 
