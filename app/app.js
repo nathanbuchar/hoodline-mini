@@ -50,8 +50,8 @@ class App {
     this._initSettings();
     this._initStartup();
     this._initAppEvents();
-    this._initTray();
     this._initFeed();
+    this._initTray();
 
     debug('application initialized');
   }
@@ -108,6 +108,17 @@ class App {
   }
 
   /**
+   * Fetches most recent neighborhood data from the server.
+   *
+   * @private
+   */
+  _initFeed() {
+    const feed = new Feed();
+
+    this._feed = feed;
+  }
+
+  /**
    * Initializes the Hoodline Mini Tray.
    *
    * @private
@@ -132,7 +143,7 @@ class App {
         label: 'Preferences…',
         click(menuItem) {
           neighborhoods.forEach(n => {
-            shell.openExternal(n.feed);
+            _this._showPreferencesWindow();
           });
         }
       },
@@ -167,7 +178,7 @@ class App {
         visible: this._isDebugMode()
       },
       {
-        label: 'Open at login',
+        label: 'Open At Login',
         type: 'checkbox',
         checked: app.getLoginItemSettings().openAtLogin,
         click(menuItem) {
@@ -191,17 +202,6 @@ class App {
   }
 
   /**
-   * Fetches most recent neighborhood data from the server.
-   *
-   * @private
-   */
-  _initFeed() {
-    const feed = new Feed();
-
-    this._feed = feed;
-  }
-
-  /**
    * Shows the Hoodline Mini "About" window.
    *
    * @private
@@ -212,14 +212,49 @@ class App {
     }
 
     this._aboutWindow = new BrowserWindow({
-      show: false
+      show: false,
+      resizable: false,
+      width: 300,
+      height: 400
     });
 
     this._aboutWindow.webContents.once('did-finish-load', () => {
       this._aboutWindow.show();
     });
 
+    this._aboutWindow.on('close', () => {
+      this._aboutWindow = null;
+    });
+
     this._aboutWindow.loadURL(`file://${__dirname}/windows/about.html`);
+  }
+
+  /**
+   * Shows the Hoodline Mini "Preferences" window.
+   *
+   * @private
+   */
+  _showPreferencesWindow() {
+    if (this._preferencesWindow) {
+      return;
+    }
+
+    this._preferencesWindow = new BrowserWindow({
+      show: false,
+      resizable: false,
+      width: 300,
+      height: 400
+    });
+
+    this._preferencesWindow.webContents.once('did-finish-load', () => {
+      this._preferencesWindow.show();
+    });
+
+    this._preferencesWindow.on('close', () => {
+      this._preferencesWindow = null;
+    });
+
+    this._preferencesWindow.loadURL(`file://${__dirname}/windows/preferences.html`);
   }
 
   /**

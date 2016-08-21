@@ -1,0 +1,43 @@
+.about {
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.about__logo-wrapper {
+  height: 100px;
+  padding: 10px 0;
+}
+
+.about__logo-image {
+  height: 100%;
+}
+
+.about__title {
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.about__description {
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.about__version {
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: normal;
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+
+.about__copyright {
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 14px;
+}

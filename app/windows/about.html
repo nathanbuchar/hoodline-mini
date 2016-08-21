@@ -3,13 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title>About Hoodline Mini</title>
+    <link rel="stylesheet" href="../assets/css/master.css">
   </head>
   <body>
     <div id="main" role="main">
-      <div class="about-page">
-        <h1>About Page</h1>
+      <div class="about">
+        <div class="about__logo-wrapper">
+          <img class="about__logo-image" src="../assets/img/Icon_512x512.png" alt="Hoodline Mini" />
+        </div>
+        <div class="about__title">
+          <p>Hoodline Mini</p>
+        </div>
+        <div class="about__description">
+          <p>Menu bar notification app for Hoodline.</p>
+        </div>
+        <div class="about__version">
+          <p>Hoodline Feed version <script>document.write(require('electron').remote.app.getVersion());</script></p>
+        </div>
+        <div class="about__copyright">
+          <p>Unless otherwise stated, all copy, images, and promotional content pulled from Hoodline are the property of Hoodline, Inc.</p>
+          <p>&copy; 2016 Nathan Buchar</p>
+          <p>All Rights Reserved.</p>
+        </div>
       </div>
     </div>
-    <script src="../dist/bundle.js"></script>
   </body>
 </html>
