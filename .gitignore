@@ -1,9 +1,9 @@
 .DS_Store
 .atomignore
 .env
-.log
 
 *~
+*.log
 
 node_modules
 dist

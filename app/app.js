@@ -19,6 +19,15 @@ class App {
   constructor() {
 
     /**
+     * A reference to the Hoodline Mini About window.
+     *
+     * @type BrowserWindow
+     * @default null
+     * @private
+     */
+    this._aboutWindow = null;
+
+    /**
      * A reference to the Hoodline Mini Tray instance.
      *
      * @type Tray
@@ -40,6 +49,7 @@ class App {
 
     this._initSettings();
     this._initStartup();
+    this._initAppEvents();
     this._initTray();
     this._initFeed();
 
@@ -85,6 +95,19 @@ class App {
   }
 
   /**
+   * Initializes app event listeners.
+   *
+   * @private
+   */
+  _initAppEvents() {
+    app.on('window-all-closed', () => {
+      // Do not quit the application when any of the windows are closed.
+      // The application persists independently of its windows.
+      return false;
+    });
+  }
+
+  /**
    * Initializes the Hoodline Mini Tray.
    *
    * @private
@@ -93,12 +116,13 @@ class App {
     const tray = new Tray(App.TrayIcon);
     const appName = app.getName();
     const appVersion = app.getVersion();
+    const _this = this;
 
     const contextMenu = Menu.buildFromTemplate([
       {
         label: 'About Hoodline Mini',
         click() {
-          // TODO
+          _this._showAboutWindow();
         }
       },
       {
@@ -175,6 +199,27 @@ class App {
     const feed = new Feed();
 
     this._feed = feed;
+  }
+
+  /**
+   * Shows the Hoodline Mini "About" window.
+   *
+   * @private
+   */
+  _showAboutWindow() {
+    if (this._aboutWindow) {
+      return;
+    }
+
+    this._aboutWindow = new BrowserWindow({
+      show: false
+    });
+
+    this._aboutWindow.webContents.once('did-finish-load', () => {
+      this._aboutWindow.show();
+    });
+
+    this._aboutWindow.loadURL(`file://${__dirname}/windows/about.html`);
   }
 
   /**
