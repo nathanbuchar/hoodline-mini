@@ -6,7 +6,7 @@ const { Menu } = require('electron');
 const { shell } = require('electron');
 const { Tray } = require('electron');
 
-const debug = require('debug')('hoodline-mini');
+const debug = require('debug')('hoodline-mini:app');
 const path = require('path');
 const settings = require('electron-settings');
 
@@ -36,10 +36,14 @@ class App {
    * @private
    */
   _init() {
+    debug('initiailizing application...');
+
     this._initSettings();
     this._initStartup();
     this._initTray();
     this._initFeed();
+
+    debug('application initialized');
   }
 
   /**

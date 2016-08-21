@@ -1,6 +1,7 @@
 'use strict';
 
 const { app } = require('electron');
+const debug = require('debug')('hoodline-mini:feed');
 const got = require('got');
 const settings = require('electron-settings');
 const xml2js = require('xml2js');
@@ -99,10 +100,14 @@ class Feed {
    * @private
    */
   _fetchNewStories(notify=true) {
+    debug('fetching new stories...');
+
     return new Promise((resolve, reject) => {
       this._fetchStories().then(stories => {
         const uniqueStories = this._filterUniqueStories(stories);
         const newStories = this._filterNewArticles(uniqueStories);
+
+        debug(`found ${newStories.length} new stories`);
 
         if (notify && uniqueStories.length) {
           this._notifyNewStories(uniqueStories);
@@ -150,6 +155,8 @@ class Feed {
    * @private
    */
   _fetchStoriesFromNeighborhood(neighborhood) {
+    debug(`fetching stories from ${neighborhood.friendlyName}...`);
+
     return new Promise((resolve, reject) => {
       this._fetchStoreisFromFeed(neighborhood.feed).then(stories => {
         resolve(stories);
