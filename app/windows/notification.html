@@ -1,16 +1,10 @@
-<script>
-  const { ipcRenderer } = require('electron');
-  const { shell } = require('electron');
-
-  ipcRenderer.on('notify', (evt, { title, body, link }) => {
-    const notification = new Notification(title, {
-      body,
-      silent: true
-    });
-
-    // Handle notification click.
-    notification.onclick = evt => {
-      shell.openExternal(link);
-    };
-  });
-</script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Notification</title>
+  </head>
+  <body class="notification-window">
+    <script src="../assets/js/app.bundle.js"></script>
+  </body>
+</html>
