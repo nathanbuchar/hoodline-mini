@@ -8,6 +8,7 @@
     "setup": "npm install"
   },
   "author": "Nathan Buchar <hello@nathanbuchar.com>",
+  "homepage": "https://github.com/nathanbuchar/hoodline-mini",
   "private": true,
   "license": "UNLICENSED",
   "dependencies": {

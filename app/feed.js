@@ -7,6 +7,7 @@ const xml2js = require('xml2js');
 
 const neighborhoods = require('./data/neighborhoods.json');
 const notifier = require('./notifier');
+const Package = require('./package.json');
 
 class Feed {
 
@@ -131,7 +132,7 @@ class Feed {
         })).then(storySets => {
           const allStories = [];
 
-          stories.forEach(storySet => {
+          storySets.forEach(storySet => {
             allStories.concat(storySet);
           });
 
@@ -164,11 +165,14 @@ class Feed {
    * @private
    */
   _fetchStoreisFromFeed(feed) {
+    const { author, homepage } = Package;
+
     return new Promise((resolve, reject) => {
       got(feed, {
         headers: {
-          'User-Agent': 'Hoodline Mini v' + app.getVersion() + ' by ' +
-            'Nathan Buchar. Contact hello@nathanbuchar.com for inquiries.'
+          'User-Agent':
+            'Hoodline Mini v' + app.getVersion() + ' by ' + author + '. ' +
+            'See ' + homepage + ' for more information.'
         }
       }).then(response => {
         if (response.statusCode === 200) {
@@ -209,6 +213,8 @@ class Feed {
     const numNewStories = stories.length;
 
     if (numNewStories === 1) {
+      const story = stories[0];
+
       notifier.notify({
         title: this._getTitleFromStory(story),
         body: this._getSummaryFromStory(story),
