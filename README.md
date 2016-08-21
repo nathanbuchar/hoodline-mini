@@ -1,4 +1,4 @@
-![](./docs/images/Banner.png)
+![Hoodline Mini](./docs/images/Banner.png)
 
 ## Hoodline Mini
 
@@ -12,7 +12,7 @@ MacOS menu bar notification app for Hoodline built on [Electron](https://electro
 
 Hoodline Mini supports all neighborhoods covered by Hoodline **except** those listed below. This is because these neighborhoods do not have a public XML feed with which to fetch story data from—at least not any that I can find.
 
-**Not supported:**
+**Not supported**
 * Bayview
 * Dogpatch
 * Glen Park
