@@ -5,21 +5,13 @@ const { shell } = require('electron');
 
 const Base = require('../common/base');
 
-class NotificationWindow extends Base {
+class NeighborhoodSelector extends Base {
 
   /**
    * Creates a new module instance.
    */
   constructor() {
     super();
-
-    /**
-     * Called when the "notify" event is emitted via IPC.
-     *
-     * @type Function
-     * @private
-     */
-    this._handleNotify = this._onNotify.bind(this);
 
     this._init();
   }
@@ -34,7 +26,7 @@ class NotificationWindow extends Base {
   }
 
   /**
-   * Registers event listeners.
+   * Initializes this module instance.
    *
    * @private
    */
@@ -48,8 +40,8 @@ class NotificationWindow extends Base {
    * @param {Object} evt
    * @private
    */
-  _onNotify(evt, { id, title, body, link }) {
-    const notification = this._createNotification(id, title, body);
+  _onNotify(evt, { title, body, link }) {
+    const notification = this._createNotification(title, body);
 
     // Handle notification click.
     notification.onclick = evt => {
@@ -60,16 +52,14 @@ class NotificationWindow extends Base {
   /**
    * Creates a new Notification.
    *
-   * @param {string} id
    * @param {string} title
    * @param {string} body
    * @returns {Notification} notification
    * @private
    */
-  _createNotification(id, title, body) {
+  _createNotification(title, body) {
     const notification = new Notification(title, {
       body,
-      tag: id,
       silent: true
     });
 
@@ -85,14 +75,14 @@ class NotificationWindow extends Base {
    * @static
    */
   static initializeAll(context=document, options={}) {
-    const nodes = context.querySelectorAll(NotificationWindow.Selectors.BASE);
+    const nodes = context.querySelectorAll(NeighborhoodSelector.Selectors.BASE);
     const instances = new Map();
 
     nodes.forEach(node => {
-      if (!NotificationWindow.Instances.has(node)) {
-        const instance = new NotificationWindow(node, options);
+      if (!NeighborhoodSelector.Instances.has(node)) {
+        const instance = new NeighborhoodSelector(node, options);
 
-        NotificationWindow.instances.set(node, instance);
+        NeighborhoodSelector.instances.set(node, instance);
         instances.set(node, instance);
       }
     });
@@ -107,7 +97,7 @@ class NotificationWindow extends Base {
  * @type Map
  * @readonly
  */
-NotificationWindow.Instances = new Map();
+NeighborhoodSelector.Instances = new Map();
 
 /**
  * Module class names.
@@ -115,8 +105,8 @@ NotificationWindow.Instances = new Map();
  * @enum {string}
  * @readonly
  */
-NotificationWindow.ClassNames = {
-  BASE: 'notification-window'
+NeighborhoodSelector.ClassNames = {
+  BASE: 'neighborhood-selector'
 };
 
 /**
@@ -125,13 +115,13 @@ NotificationWindow.ClassNames = {
  * @enum {string}
  * @readonly
  */
-NotificationWindow.Selectors = {
-  BASE: `.${NotificationWindow.ClassNames.BASE}`
+NeighborhoodSelector.Selectors = {
+  BASE: `.${NeighborhoodSelector.ClassNames.BASE}`
 };
 
 /**
  * Initializes all module instances.
  */
-NotificationWindow.initializeAll();
+NeighborhoodSelector.initializeAll();
 
-module.exports = NotificationWindow;
+module.exports = NeighborhoodSelector;

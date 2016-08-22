@@ -69,6 +69,10 @@
   overflow: hidden;
 }
 
+.unstyled-list {
+  list-style-type: none;
+}
+
 /**
  * Create a `padding-bottom-x` class that increments each selector from 10px to
  * 200px in intervals of 10px.

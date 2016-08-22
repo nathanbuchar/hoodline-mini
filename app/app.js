@@ -14,6 +14,13 @@ const Feed = require('./feed');
 const neighborhoods = require('./data/neighborhoods.json');
 const notifier = require('./notifier');
 
+/**
+ * Whether the application is in debug mode.
+ *
+ * @type string
+ */
+const IS_DEBUG_MODE = process.env.NODE_ENV === 'development';
+
 class App {
 
   constructor() {
@@ -62,23 +69,20 @@ class App {
    * @private
    */
   _initSettings() {
-    const isDebugMode = process.env.NODE_ENV === 'development';
 
+    // Global settings configuration.
     settings.configure({
-      prettify: isDebugMode
+      prettify: IS_DEBUG_MODE
     });
 
+    // Define default settings.
     settings.defaults({
-      subscriptions: []
+      isSubscribedToAll: true,
+      subscriptions: ['all']
     });
 
-    if (isDebugMode) {
-      settings.setSync('debugMode', true);
-    } else {
-      if (settings.hasSync('debugMode')) {
-        settings.deleteSync('debugMode');
-      }
-    }
+    // Ensure defaults exist.
+    settings.applyDefaultsSync();
   }
 
   /**
@@ -93,7 +97,7 @@ class App {
     settings.setSync('version', version);
     settings.setSync('lastOpened', now);
 
-    if (!this._isDebugMode()) {
+    if (!IS_DEBUG_MODE) {
       app.dock.hide();
     }
   }
@@ -156,7 +160,7 @@ class App {
           type: 'separator'
         }
       ],
-      this._isDebugMode() ? [
+      IS_DEBUG_MODE ? [
         {
           label: 'Debug',
           type: 'submenu',
@@ -221,7 +225,7 @@ class App {
 
     this._aboutWindow = new BrowserWindow({
       show: false,
-      resizable: this._isDebugMode(),
+      resizable: IS_DEBUG_MODE,
       minimizable: false,
       maximizable: false,
       fullscreenable: false,
@@ -252,11 +256,11 @@ class App {
 
     this._preferencesWindow = new BrowserWindow({
       show: false,
-      resizable: this._isDebugMode(),
+      resizable: IS_DEBUG_MODE,
       maximizable: false,
       fullscreenable: false,
-      width: 300,
-      height: 400
+      width: 760,
+      height: 550
     });
 
     this._preferencesWindow.webContents.once('did-finish-load', () => {
@@ -268,16 +272,6 @@ class App {
     });
 
     this._preferencesWindow.loadURL(`file://${__dirname}/windows/preferences.html`);
-  }
-
-  /**
-   * Whether the application is currently in debug mode.
-   *
-   * @returns {boolean}
-   * @private
-   */
-  _isDebugMode() {
-    return settings.getSync('debugMode') === true;
   }
 }
 

@@ -4,8 +4,13 @@
   font-size: 14px;
   color: get-color(hoodlinedarkgray);
   padding: 10px;
-  transition: color get-duration(fast) ease, background get-duration(fast) ease;
+  cursor: pointer;
+  transition: color get-duration(faster) ease, background get-duration(faster) ease;
   will-change: color, background;
+
+  &:hover {
+    background-color: darken(get-color(hoodlinelightgray), 15%);
+  }
 
   &--active {
     background-color: get-color(hoodlinedarkgray);
@@ -18,12 +23,13 @@
   font-family: get-font(sansBold);
   font-size: 16px;
   color: get-color(white);
-  padding: 15px;
-  transition: background get-duration(fast) ease;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background get-duration(faster) ease;
   will-change: background;
   border-radius: 6px;
 
-  &--active {
+  &:hover {
     background-color: get-color(hoodlinedarkgray);
   }
 }

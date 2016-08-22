@@ -4,9 +4,60 @@
     <meta charset="utf-8">
     <title>Hoodline Mini Preferences</title>
     <link rel="stylesheet" href="../assets/css/all.css">
+    <script>
+      const { remote } = require('electron');
+      const { app } = remote;
+
+      const settings = require('electron-settings');
+    </script>
   </head>
   <body>
-    <div id="main" role="main">
+    <div class="preferences-window">
+      <div class="container">
+        <div class="row">
+          <div class="col-8@sm col-offset-2@sm">
+            <h1 class="type--header-1 text-center">Preferences</h1>
+            <p class="type--header-2 text-center padding-bottom-30">Choose your neighborhood subscriptions.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12@sm">
+            <div class="neighborhood-selector">
+              <ul class="neighborhood-selector__list">
+                <script>
+                  const neighborhoods = require('../data/neighborhoods.json');
+
+                  neighborhoods.forEach(({ id, friendlyName, type, supported }) => {
+                    if (!supported) return;
+
+                    const subscriptions = settings.getSync('subscriptions');
+                    const isSubscribed = subscriptions.indexOf(id) >= 0;
+
+                    document.write(
+                      '<li class="neighborhood-selector__list__item" data-id="' + id +
+                      '" data-type="' + type + '">\n\t<div class="type--button-1' +
+                      (isSubscribed ? ' type--button-1--active' : '') + '">' + friendlyName +
+                      '</div></li>\n'
+                    );
+                  });
+                </script>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12@sm">
+            <div class="preferences-window__done-button-wrapper">
+              <div class="preferences-window__done-button">
+                <span class="type--button-2">Done</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="preferences-window__corner-pigeon">
+        <img src="../assets/img/corner-pigeon.png" alt="" />
+      </div>
     </div>
   </body>
 </html>

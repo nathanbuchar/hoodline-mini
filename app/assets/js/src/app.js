@@ -1,5 +1,7 @@
 'use strict';
 
-const NotificationWindow = require('./windows/notification');
+// Modules
+require('./modules/neighborhood-selector');
 
-console.log(NotificationWindow);
+// Windows
+require('./windows/notification');

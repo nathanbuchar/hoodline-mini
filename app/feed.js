@@ -219,21 +219,31 @@ class Feed {
   _notifyNewStories(stories) {
     const numNewStories = stories.length;
 
-    if (numNewStories === 1) {
-      const story = stories[0];
-
+    stories.forEach(story => {
       notifier.notify({
+        id: this._getTitleFromStory(),
         title: this._getTitleFromStory(story),
         body: this._getSummaryFromStory(story),
         link: this._getLinkFromStory(story)
       });
-    } else if (numNewStories > 1) {
-      notifier.notify({
-        title: `${numNewStories} new stories`,
-        body: 'Visit Hoodline.com to read more.',
-        link: 'http://hoodline.com'
-      });
-    }
+    });
+
+    // if (numNewStories === 1) {
+    //   const story = stories[0];
+    //
+    //   notifier.notify({
+    //     title: this._getTitleFromStory(story),
+    //     body: this._getSummaryFromStory(story),
+    //     link: this._getLinkFromStory(story)
+    //   });
+    // } else if (numNewStories > 1) {
+    //   notifier.notify({
+    //     title: `${numNewStories} new stories`,
+    //     body: 'Visit Hoodline.com to read more.',
+    //     id: this._getTitleFromStory(),
+    //     link: 'http://hoodline.com'
+    //   });
+    // }
   }
 
   /**

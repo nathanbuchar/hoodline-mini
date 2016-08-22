@@ -1,0 +1,18 @@
+.neighborhood-selector {}
+
+.neighborhood-selector__list {
+  @extend .unstyled-list;
+  @extend .text-center;
+}
+
+.neighborhood-selector__list__item {
+  display: inline-block;
+  padding: 3px 1px;
+
+  &[data-type="all"] {
+    display: block;
+    width: 40px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+}

@@ -1,11 +1,13 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-const NotificationWindow = require('./windows/notification');
+// Modules
+require('./modules/neighborhood-selector');
 
-console.log(NotificationWindow);
+// Windows
+require('./windows/notification');
 
-},{"./windows/notification":3}],2:[function(require,module,exports){
+},{"./modules/neighborhood-selector":3,"./windows/notification":4}],2:[function(require,module,exports){
 'use strict';
 
 const { EventEmitter } = require('events');
@@ -18,7 +20,7 @@ class Base extends EventEmitter {
 
 module.exports = Base;
 
-},{"events":4}],3:[function(require,module,exports){
+},{"events":5}],3:[function(require,module,exports){
 'use strict';
 
 const { ipcRenderer } = require('electron');
@@ -26,15 +28,13 @@ const { shell } = require('electron');
 
 const Base = require('../common/base');
 
-class NotificationWindow extends Base {
+class NeighborhoodSelector extends Base {
 
   /**
    * Creates a new module instance.
    */
   constructor() {
     super();
-
-    this._handleNotify = this._onNotify.bind(this);
 
     this._init();
   }
@@ -83,6 +83,145 @@ class NotificationWindow extends Base {
   _createNotification(title, body) {
     const notification = new Notification(title, {
       body,
+      silent: true
+    });
+
+    return notification;
+  }
+
+  /**
+   * Initializes all modules within the given context.
+   *
+   * @param {Object} context
+   * @param {Object} options
+   * @returns {Map} instances
+   * @static
+   */
+  static initializeAll(context=document, options={}) {
+    const nodes = context.querySelectorAll(NeighborhoodSelector.Selectors.BASE);
+    const instances = new Map();
+
+    nodes.forEach(node => {
+      if (!NeighborhoodSelector.Instances.has(node)) {
+        const instance = new NeighborhoodSelector(node, options);
+
+        NeighborhoodSelector.instances.set(node, instance);
+        instances.set(node, instance);
+      }
+    });
+
+    return instances;
+  }
+}
+
+/**
+ * Module instances map.
+ *
+ * @type Map
+ * @readonly
+ */
+NeighborhoodSelector.Instances = new Map();
+
+/**
+ * Module class names.
+ *
+ * @enum {string}
+ * @readonly
+ */
+NeighborhoodSelector.ClassNames = {
+  BASE: 'neighborhood-selector'
+};
+
+/**
+ * Module selectors.
+ *
+ * @enum {string}
+ * @readonly
+ */
+NeighborhoodSelector.Selectors = {
+  BASE: `.${NeighborhoodSelector.ClassNames.BASE}`
+};
+
+/**
+ * Initializes all module instances.
+ */
+NeighborhoodSelector.initializeAll();
+
+module.exports = NeighborhoodSelector;
+
+},{"../common/base":2,"electron":undefined}],4:[function(require,module,exports){
+'use strict';
+
+const { ipcRenderer } = require('electron');
+const { shell } = require('electron');
+
+const Base = require('../common/base');
+
+class NotificationWindow extends Base {
+
+  /**
+   * Creates a new module instance.
+   */
+  constructor() {
+    super();
+
+    /**
+     * Called when the "notify" event is emitted via IPC.
+     *
+     * @type Function
+     * @private
+     */
+    this._handleNotify = this._onNotify.bind(this);
+
+    this._init();
+  }
+
+  /**
+   * Initializes this module instance.
+   *
+   * @private
+   */
+  _init() {
+    this._initEvents();
+  }
+
+  /**
+   * Registers event listeners.
+   *
+   * @private
+   */
+  _initEvents() {
+    ipcRenderer.on('notify', this._handleNotify);
+  }
+
+  /**
+   * Called when the "notify" event is emitted via IPC.
+   *
+   * @param {Object} evt
+   * @private
+   */
+  _onNotify(evt, { id, title, body, link }) {
+    const notification = this._createNotification(id, title, body);
+
+    // Handle notification click.
+    notification.onclick = evt => {
+      shell.openExternal(link);
+    };
+  }
+
+  /**
+   * Creates a new Notification.
+   *
+   * @param {string} id
+   * @param {string} title
+   * @param {string} body
+   * @returns {Notification} notification
+   * @private
+   */
+  _createNotification(id, title, body) {
+    const notification = new Notification(title, {
+      body,
+      tag: id,
       silent: true
     });
 
@@ -149,7 +288,7 @@ NotificationWindow.initializeAll();
 
 module.exports = NotificationWindow;
 
-},{"../common/base":2,"electron":undefined}],4:[function(require,module,exports){
+},{"../common/base":2,"electron":undefined}],5:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a

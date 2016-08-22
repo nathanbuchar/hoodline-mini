@@ -1,15 +1,18 @@
-@import 'extensions/functions';
-@import 'extensions/mixins';
+@import "extensions/functions";
+@import "extensions/mixins";
 
-@import 'global/variables';
-@import 'global/reset';
-@import 'global/utilities';
-@import 'global/grid';
-@import 'global/aspect';
-@import 'global/colors';
-@import 'global/fonts';
-@import 'global/type';
-@import 'global/buttons';
-@import 'global/base';
+@import "global/variables";
+@import "global/reset";
+@import "global/utilities";
+@import "global/grid";
+@import "global/aspect";
+@import "global/colors";
+@import "global/fonts";
+@import "global/type";
+@import "global/buttons";
+@import "global/base";
 
-@import 'windows/about';
+@import "modules/neighborhood-selector/neighborhood-selector";
+
+@import "windows/about";
+@import "windows/preferences";
