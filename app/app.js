@@ -222,6 +222,9 @@ class App {
     this._aboutWindow = new BrowserWindow({
       show: false,
       resizable: false,
+      minimizable: false,
+      maximizable: false,
+      fullscreenable: false,
       width: 300,
       height: 500
     });
@@ -250,6 +253,8 @@ class App {
     this._preferencesWindow = new BrowserWindow({
       show: false,
       resizable: false,
+      maximizable: false,
+      fullscreenable: false,
       width: 300,
       height: 400
     });
