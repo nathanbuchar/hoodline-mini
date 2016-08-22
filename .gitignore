@@ -1,6 +1,5 @@
 .DS_Store
 .atomignore
-.dist
 .env
 
 *~

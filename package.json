@@ -1,4 +1,5 @@
 {
+  "private": true,
   "scripts": {
     "start": "electron app",
     "setup": "npm run setup:builder && npm run setup:app",
@@ -6,9 +7,8 @@
     "setup:app": "(cd app && npm run setup)",
     "build:frontend": "gulp build",
     "watch:frontend": "export NODE_ENV=\"development\" && gulp build:watch",
-    "build": "npm run build:frontend && export CSC_NAME=\"Nathaniel Buchar (CAN92U6WU7)\" && build && open -a Finder dist/mac"
+    "build": "npm run build:frontend && build && open -a Finder dist/mac"
   },
-  "private": true,
   "devDependencies": {
     "browserify": "^13.1.0",
     "electron-builder": "^5.26.0",
@@ -16,6 +16,7 @@
     "gulp": "^3.9.1",
     "gulp-if": "^2.0.1",
     "gulp-import-tasks": "^0.1.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-sequence": "^0.4.5",
     "gulp-sourcemaps": "^1.6.0",
@@ -29,8 +30,12 @@
     "category": "public.app-category.news",
     "productName": "Hoodline Mini",
     "compression": "store",
+    "files": [
+      "*/**"
+    ],
     "mac": {
-      "icon": "build/Icon.icns"
+      "icon": "build/Icon.icns",
+      "identity": "Nathaniel Buchar (CAN92U6WU7)"
     },
     "dmg": {
       "icon": "build/Icon-dmg.icns",

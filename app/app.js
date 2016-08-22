@@ -221,7 +221,7 @@ class App {
 
     this._aboutWindow = new BrowserWindow({
       show: false,
-      resizable: false,
+      resizable: this._isDebugMode(),
       minimizable: false,
       maximizable: false,
       fullscreenable: false,
@@ -252,7 +252,7 @@ class App {
 
     this._preferencesWindow = new BrowserWindow({
       show: false,
-      resizable: false,
+      resizable: this._isDebugMode(),
       maximizable: false,
       fullscreenable: false,
       width: 300,

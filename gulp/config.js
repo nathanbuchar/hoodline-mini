@@ -9,12 +9,12 @@ module.exports.paths = {
   app: 'app',
   assets: 'app/assets',
   src: {
-    scripts: 'app/assets/js',
-    styles: 'app/assets/css'
+    scripts: 'app/assets/js/src',
+    styles: 'app/assets/css/src'
   },
   dist: {
-    scripts: 'app/assets/js/.dist',
-    styles: 'app/assets/css/.dist'
+    scripts: 'app/assets/js',
+    styles: 'app/assets/css'
   }
 };
 
@@ -24,7 +24,8 @@ module.exports.paths = {
 module.exports.files = {
   app: 'app.js',
   bundle: 'app.bundle.js',
-  main: 'main.scss'
+  main: 'main.scss',
+  all: 'all.css'
 };
 
 /**
