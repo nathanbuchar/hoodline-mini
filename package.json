@@ -31,6 +31,24 @@
     "compression": "store",
     "mac": {
       "icon": "build/Icon.icns"
+    },
+    "dmg": {
+      "icon": "build/Icon-dmg.icns",
+      "background": "build/Background.png",
+      "contents": [
+        {
+          "x": 360,
+          "y": 210,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 141,
+          "y": 210,
+          "type": "file",
+          "path": "computed path to artifact, do not specify it - will be overwritten"
+        }
+      ]
     }
   }
 }
