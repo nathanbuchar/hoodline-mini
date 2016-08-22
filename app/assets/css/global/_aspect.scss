@@ -1,0 +1,37 @@
+@mixin make-aspect-box($ratio, $values, $breakpoint: null) {
+  @if $breakpoint {
+    .aspect-#{$ratio}\@#{$breakpoint} {
+      @include aspect();
+      padding-bottom: ratio(nth($values, 2), nth($values, 1));
+    }
+    .aspect-none\@#{$breakpoint} {
+      @include no-aspect();
+    }
+  } @else {
+    .aspect-#{$ratio} {
+      @include aspect();
+      padding-bottom: ratio(nth($values, 2), nth($values, 1));
+    }
+  }
+}
+
+@mixin make-aspect-boxes($aspect-boxes, $breakpoint: null) {
+  @each $ratio, $values in $aspect-boxes {
+    @include make-aspect-box($ratio, $values, $breakpoint);
+  }
+}
+
+@mixin make-responsive-aspect-boxes($aspect-boxes, $breakpoints) {
+  @each $breakpoint, $px in $breakpoints {
+    @include breakpoint($breakpoint) {
+      @include make-aspect-boxes($aspect-boxes, $breakpoint);
+    }
+  }
+}
+
+@mixin generate-aspect-boxes($aspect-boxes, $breakpoints) {
+  @include make-aspect-boxes($aspect-boxes);
+  @include make-responsive-aspect-boxes($aspect-boxes, $breakpoints);
+}
+
+@include generate-aspect-boxes($aspect-boxes, $breakpoints);

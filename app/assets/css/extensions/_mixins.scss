@@ -1,0 +1,127 @@
+/**
+ * clearfix
+ *
+ * Clearfix mixin.
+ */
+@mixin clearfix {
+  &::before,
+  &::after {
+    display: table;
+    content: '';
+  }
+  &::after {
+    clear: both;
+  }
+}
+
+/**
+ * fill-parent
+ *
+ * Absolutely fill the parent container.
+ */
+@mixin fill-parent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/**
+ * aspect
+ *
+ * Defaults to a square aspect ratio.
+ */
+@mixin aspect() {
+  &.aspect {
+    position: relative;
+    padding-bottom: 100%;
+  }
+
+  > .aspect-inner {
+    @include fill-parent();
+  }
+}
+
+/**
+ * no-aspect
+ *
+ * Force no aspect ratio.
+ */
+@mixin no-aspect() {
+  padding-bottom: 0;
+
+  > .aspect-inner {
+    position: static;
+  }
+}
+
+/**
+ * table-center-wrap
+ *
+ * Wrapper for table centering.
+ */
+@mixin table-center-wrap {
+  display: table;
+  position: relative;
+}
+
+/**
+ * table-center-inner
+ *
+ * Inner container for table centering.
+ */
+@mixin table-center-inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/**
+ * auto-margins
+ *
+ * Set the horizontal margins to auto.
+ */
+@mixin auto-margins {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/**
+ * font
+ *
+ * Sets the font family, style, and weight from a given font style.
+ */
+@mixin font($font) {
+  @if map-has-key($fonts, $font) {
+    $style: font($font);
+
+    font-family: map-get($style, font-family);
+    font-style: map-get($style, font-style);
+    font-weight: map-get($style, font-weight);
+  } @else {
+    @warn "Unknown `#{$font}` in $fonts.";
+  }
+}
+
+/**
+ * breakpoint
+ *
+ * Generates a min-width breakpoint. If the breakpoint passed in is a key in the
+ * $breakpoints map, translate to the correct pixel value, otherwise default to
+ * the value that was passed in.
+ */
+@mixin breakpoint($breakpoint, $max: false) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @if $max {
+      @media (max-width: breakpoint($breakpoint)) {
+        @content;
+      }
+    } @else {
+      @media (min-width: breakpoint($breakpoint)) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "Unknown `#{$font}` in $fonts.";
+  }
+}

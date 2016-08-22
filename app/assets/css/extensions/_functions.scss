@@ -1,0 +1,158 @@
+/**
+ * Returns the specified color if it exists in either the primaries or grays.
+ * See $colors.
+ *
+ * Example usage:
+ *   - get-color(shale) => rgb(50, 54, 64)
+ *   - get-color(gray80) => rgb(212, 212, 212)
+ */
+@function get-color($key) {
+  $_primary: map-get($colors, primary);
+  $_grays: map-get($colors, grays);
+
+  @if map-has-key($_primary, $key) {
+    @return map-get($_primary, $key);
+  }
+
+  @else if map-has-key($_grays, $key) {
+    @return map-get($_grays, $key);
+  }
+
+  @error "Unknown `#{$key}` in $colors.";
+}
+
+/**
+ * Returns the specified breakpoint if it exists. See $breakpoints.
+ *
+ * Example usage:
+ *   - get-breakpoint(sm) => 768px
+ *   - get-breakpoint(lg) => 1200px
+ */
+@function get-breakpoint($key) {
+  @if map-has-key($breakpoints, $key) {
+    @return map-get($breakpoints, $key);
+  }
+
+  @error "Unknown `#{$key}` in $breakpoints.";
+}
+
+/**
+ * Returns the specified font if it exists. See $fonts.
+ *
+ * Example usage:
+ *   - get-font(sansExtraLight) => (...)
+ *   - get-font(sansRegular) => (...)
+ */
+@function get-font($key) {
+  @if map-has-key($fonts, $key) {
+    @return map-get($fonts, $key);
+  }
+
+  @error "Unknown `#{$key}` in $fonts.";
+}
+
+/**
+ * Retruns the specified duration speed if it exists. See $durations.
+ *
+ * Example usage:
+ *   - get-duration(slowest) => 1500ms
+ *   - get-duration(fast) => 350ms
+ */
+@function get-duration($key) {
+  @if map-has-key($durations, $key) {
+    @return map-get($durations, $key);
+  }
+
+  @error "Unknown `#{$key}` in $durations.";
+}
+
+/**
+ * Returns the specified timing bezier definition if it exists. See $timing.
+ *
+ * Example usage:
+ *   - get-timing(easeOutQuad) => cubic-bezier(0.250, 0.460, 0.450, 0.940)
+ *   - get-timing(easeOutBack) => cubic-bezier(0.175, 0.885, 0.320, 1.275)
+ */
+@function get-timing($key) {
+  @if map-has-key($timing, $key) {
+    @return map-get($timing, $key);
+  }
+
+  @error "Unknown `#{$key}` in $timing.";
+}
+
+/**
+ * Returns the ratio between two numbers.
+ *
+ * Example usage:
+ *   - ratio(1,2) => 0.5
+ *   - ratio(1,4) => 0.25
+ */
+@function ratio($a, $b) {
+  @return $a / $b;
+}
+
+/**
+ * Converts a number into a percentage.
+ *
+ * Example usage:
+ *   - percentage(0.5) => 50%
+ *   - percentage(1.27) => 127%
+ */
+@function percentage($value) {
+  @return strip-units($value) * 100%;
+}
+
+/**
+ * Returns the percentage representation of a ratio between two numbers.
+ *
+ * Example usage:
+ *   - ratio(1,2) => 50%
+ *   - ratio(1,4) => 25%
+ */
+@function percentage-from-ratio($a, $b) {
+  @return percentage(ratio($a, $b));
+}
+
+/**
+ * Strips units from any value.
+ *
+ * Example usage:
+ *   - strip-units(50px) => 50
+ *   - strip-units(12em) => 12
+ */
+@function strip-units($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+/**
+ * Converts px to em with regard to its context. Most context will be 16px.
+ *
+ * Example usage:
+ *   - em(32px) => 2em
+ *   - em(32px, 8px) => 4em
+ */
+@function em($px, $context:16px) {
+  @return strip-units($px) / strip-units($context) + 0em;
+}
+
+/**
+ * Converts px to rem with regard to its context. Most context will be 16px.
+ *
+ * Example usage:
+ *   - em(32px) => 2rem
+ *   - em(32px, 8px) => 4rem
+ */
+@function rem($px, $context:16px) {
+  @return strip-units($px) / strip-units($context) + 0rem;
+}
+
+/**
+ * Converts ps to rem.
+ *
+ * Example usage:
+ *   - em(12ps) => 0.12rem
+ */
+@function ps-to-rem($ps) {
+  @return strip-units($ps) / 100 * 1rem;
+}

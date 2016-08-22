@@ -1,0 +1,49 @@
+.type--header-1 {
+  font-family: get-font(sansBlack);
+  font-size: 36px;
+  line-height: 56px;
+  color: get-color(hoodlinered);
+}
+
+.type--header-2 {
+  font-family: get-font(sansBold);
+  font-size: 18px;
+  line-height: 32px;
+  color: get-color(hoodlinedarkgray);
+}
+
+.type--header-3 {
+  font-family: get-font(sansBold);
+  font-size: 12px;
+  line-height: 22px;
+  color: get-color(hoodlinedarkgray);
+}
+
+.type--body-1 {
+  font-family: get-font(sansRegular);
+  font-size: 12px;
+  line-height: 32px;
+  color: get-color(hoodlinedarkgray);
+}
+
+.type--body-2 {
+  font-family: get-font(sansRegular);
+  font-size: 11px;
+  line-height: 24px;
+  color: get-color(hoodlinedarkgray);
+}
+
+.type--body-3 {
+  font-family: get-font(sansRegular);
+  font-size: 10px;
+  line-height: 14px;
+  color: get-color(hoodlinedarkgray);
+}
+
+.type--link-1 {
+  font-family: get-font(sansBold);
+  font-size: 12px;
+  line-height: 15px;
+  text-decoration: underline;
+  color: inherit;
+}

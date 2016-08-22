@@ -5,9 +5,9 @@ const gulp = require('gulp');
 const sequence = require('gulp-sequence');
 
 /**
- * Load in environment variables if they exist.
+ * Load in Gulp configuration.
  */
-dotenv.config({ silent: true });
+const config = require('./gulp/config');
 
 /**
  * Register gulp tasks.
@@ -15,7 +15,7 @@ dotenv.config({ silent: true });
 require('gulp-import-tasks')({
   dir: 'gulp/tasks',
   params: [
-    require('./gulp/config')
+    config
   ]
 });
 

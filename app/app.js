@@ -223,7 +223,7 @@ class App {
       show: false,
       resizable: false,
       width: 300,
-      height: 400
+      height: 500
     });
 
     this._aboutWindow.webContents.once('did-finish-load', () => {

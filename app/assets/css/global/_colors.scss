@@ -1,0 +1,29 @@
+@mixin make-color($swatch, $value) {
+  .color-#{$swatch} {
+    color: $value;
+  }
+}
+
+@mixin make-fill($swatch, $value) {
+  .fill-#{$swatch} {
+    fill: $value;
+  }
+}
+
+@mixin make-background($swatch, $value) {
+  .background-#{$swatch} {
+    background-color: $value;
+  }
+}
+
+@mixin generate-colors($colors) {
+  @each $set, $swatches in $colors {
+    @each $swatch, $value in $swatches {
+      @include make-color($swatch, $value);
+      @include make-fill($swatch, $value);
+      @include make-background($swatch, $value);
+    }
+  }
+}
+
+@include generate-colors($colors);

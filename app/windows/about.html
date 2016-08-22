@@ -3,30 +3,53 @@
   <head>
     <meta charset="utf-8">
     <title>About Hoodline Mini</title>
-    <link rel="stylesheet" href="../assets/css/master.css">
+    <link rel="stylesheet" href="../assets/css/.dist/main.css">
+    <script>
+      const { remote } = require('electron');
+      const { app, shell } = remote;
+    </script>
   </head>
   <body>
-    <div id="main" role="main">
-      <div class="about">
-        <div class="about__logo-wrapper">
-          <img class="about__logo-image" src="../assets/img/Icon_512x512.png" alt="Hoodline Mini" />
+    <div class="about-window">
+      <div class="container">
+        <div class="row">
+          <div class="col-12@sm">
+            <img class="about-window__icon" src="../assets/img/icon.png" alt="Hoodline Mini" />
+          </div>
         </div>
-        <div class="about__title">
-          <p>Hoodline Mini</p>
+        <div class="row">
+          <div class="col-12@sm">
+            <div class="about-window__header">
+              <h1 class="about-window__title type--header-3">
+                <script>
+                  document.write(app.getName());
+                </script>
+              </h1>
+              <p class="about-window__description type--body-1">Menu bar notification app for Hoodline.</p>
+              <p class="about-window__version type--body-2">
+                <script>
+                  document.write(`Version ${app.getVersion()}`);
+                </script>
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="about__description">
-          <p>Menu bar notification app for Hoodline.</p>
+        <div class="row">
+          <div class="col-12@sm">
+            <div class="about-window__footer">
+              <p class="type--body-3 padding-bottom-10">Unless otherwise stated, all copy, images, and promotional content pulled from Hoodline are the property of Hoodline, Inc.</p>
+              <p class="type--body-3 padding-bottom-20">Copyright &copy; 2016 Nathan Buchar</p>
+              <p class="type--body-2 padding-bottom-10"><a class="type--link-1" href="#" onclick="shell.openExternal('https://github.com/nathanbuchar/hoodline-mini')">View project on GitHub</a></p>
+            </div>
+          </div>
         </div>
-        <div class="about__version">
-          <p>Hoodline Feed version <script>document.write(require('electron').remote.app.getVersion());</script></p>
-        </div>
-        <div class="about__copyright">
-          <p>Unless otherwise stated, all copy, images, and promotional content pulled from Hoodline are the property of Hoodline, Inc.</p>
-          <p>&copy; 2016 Nathan Buchar</p>
-          <p>All Rights Reserved.</p>
+        <div class="row">
+          <div class="col-12@sm">
+            <img class="about-window__logo" src="../assets/img/logo.png" alt="" />
+          </div>
         </div>
       </div>
     </div>
-    <script src="../assets/js/app.bundle.js"></script>
+    <script src="../assets/js/.dist/app.bundle.js"></script>
   </body>
 </html>

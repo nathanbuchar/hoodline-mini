@@ -1,3 +1,15 @@
-@import './global/reset';
+@import 'extensions/functions';
+@import 'extensions/mixins';
 
-@import './windows/about';
+@import 'global/variables';
+@import 'global/reset';
+@import 'global/utilities';
+@import 'global/grid';
+@import 'global/aspect';
+@import 'global/colors';
+@import 'global/fonts';
+@import 'global/type';
+@import 'global/buttons';
+@import 'global/base';
+
+@import 'windows/about';

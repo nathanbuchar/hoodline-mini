@@ -1,0 +1,91 @@
+.clearfix {
+  @include clearfix;
+}
+
+.fill-parent {
+  @include fill-parent();
+}
+
+.table-center-wrap {
+  @include table-center-wrap();
+}
+
+.table-center {
+  @include table-center-inner();
+}
+
+.auto-margins {
+  @include auto-margins();
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.full-height {
+  position: relative;
+  height: 100%;
+}
+
+.full-width {
+  position: relative;
+  width: 100%;
+}
+
+.full {
+  @extend .full-height;
+  @extend .full-width;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/**
+ * Create a `padding-bottom-x` class that increments each selector from 10px to
+ * 200px in intervals of 10px.
+ */
+@for $i from 1 through 20 {
+  .padding-bottom-#{$i * 10} {
+    padding-bottom: rem($i * 10px);
+  }
+}
+
+@each $breakpoint, $px in $breakpoints {
+  @include breakpoint($breakpoint) {
+    .hide\@#{$breakpoint} {
+      visibility: hidden;
+    }
+    .show\@#{$breakpoint} {
+      visibility: visible;
+    }
+  }
+}
