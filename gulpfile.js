@@ -1,6 +1,5 @@
 'use strict';
 
-const dotenv = require('dotenv');
 const gulp = require('gulp');
 const sequence = require('gulp-sequence');
 
