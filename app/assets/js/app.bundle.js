@@ -200,8 +200,8 @@ class NotificationWindow extends Base {
    * @param {Object} evt
    * @private
    */
-  _onNotify(evt, { id, title, body, link }) {
-    const notification = this._createNotification(id, title, body);
+  _onNotify(evt, { title, body, link }) {
+    const notification = this._createNotification(title, body);
 
     // Handle notification click.
     notification.onclick = evt => {
@@ -212,16 +212,15 @@ class NotificationWindow extends Base {
   /**
    * Creates a new Notification.
    *
-   * @param {string} id
    * @param {string} title
    * @param {string} body
    * @returns {Notification} notification
    * @private
    */
-  _createNotification(id, title, body) {
+  _createNotification(title, body) {
     const notification = new Notification(title, {
       body,
-      tag: id,
+      sticky: true,
       silent: true
     });
 

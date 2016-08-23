@@ -12,7 +12,7 @@ const settings = require('electron-settings');
 
 const Feed = require('./feed');
 const neighborhoods = require('./data/neighborhoods.json');
-const notifier = require('./notifier');
+const Notifier = require('./notifier');
 
 /**
  * Whether the application is in debug mode.
@@ -43,6 +43,14 @@ class App {
      */
     this._tray = null;
 
+    /**
+     * Called when new stories are found.
+     *
+     * @type Function
+     * @private
+     */
+    this._handleNewStories = this._onNewStories.bind(this);
+
     this._init();
   }
 
@@ -57,6 +65,7 @@ class App {
     this._initSettings();
     this._initStartup();
     this._initAppEvents();
+    this._initNotifier();
     this._initFeed();
     this._initTray();
 
@@ -116,12 +125,25 @@ class App {
   }
 
   /**
+   * Initializes the Notifier instance.
+   *
+   * @private
+   */
+  _initNotifier() {
+    const notifier = new Notifier();
+
+    this._notifier = notifier;
+  }
+
+  /**
    * Fetches most recent neighborhood data from the server.
    *
    * @private
    */
   _initFeed() {
     const feed = new Feed();
+
+    feed.on('new-stories', this._handleNewStories);
 
     this._feed = feed;
   }
@@ -174,7 +196,7 @@ class App {
             {
               label: 'Send test notification…',
               click() {
-                notifier.notify({
+                this._notifier.notify({
                   title: 'Test',
                   body: 'This is a test notification.',
                   link: 'https://github.com/nathanbuchar/hoodline-mini'
@@ -272,6 +294,20 @@ class App {
     });
 
     this._preferencesWindow.loadURL(`file://${__dirname}/windows/preferences.html`);
+  }
+
+  /**
+   * Sends notifications for new stories.
+   *
+   * @param {Array} stories
+   * @private
+   */
+  _onNewStories(stories) {
+    stories.forEach((story, i) => {
+      setTimeout(() => {
+        this._notifier.notify(story);
+      }, i * 6000);
+    });
   }
 }
 

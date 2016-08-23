@@ -1,18 +1,19 @@
 'use strict';
 
 const { app } = require('electron');
+const { EventEmitter } = require('events');
 const debug = require('debug')('hoodline-mini:feed');
 const got = require('got');
 const settings = require('electron-settings');
 const xml2js = require('xml2js');
 
 const neighborhoods = require('./data/neighborhoods.json');
-const notifier = require('./notifier');
 const Package = require('./package.json');
 
-class Feed {
+class Feed extends EventEmitter {
 
   constructor() {
+    super();
 
     /**
      * The last time the feed was checked.
@@ -50,7 +51,7 @@ class Feed {
    */
   _init() {
     this._initLastUpdatedTime();
-    this._initPollingInterval();
+    this._initPollingInterval(true);
   }
 
   /**
@@ -65,10 +66,15 @@ class Feed {
   /**
    * Initializes the polling interval.
    *
+   * @param {boolean} immediate
    * @private
    */
-  _initPollingInterval() {
+  _initPollingInterval(immediate=false) {
     this._pollInterval = setInterval(this._handlePoll, Feed.PollingFrequency);
+
+    if (immediate) {
+      this._handlePoll();
+    }
   }
 
   /**
@@ -109,8 +115,14 @@ class Feed {
 
         debug(`found ${newStories.length} new stories`);
 
-        if (notify && uniqueStories.length) {
-          this._notifyNewStories(uniqueStories);
+        if (notify && newStories.length) {
+          this.emit(Feed.Events.NEW_STORIES, newStories.map(story => {
+            return {
+              title: this._getTitleFromStory(story),
+              body: this._getSummaryFromStory(story),
+              link: this._getLinkFromStory(story)
+            };
+          }));
         }
 
         this._updateLastUpdatedTime();
@@ -132,14 +144,12 @@ class Feed {
   _fetchStories() {
     return new Promise((resolve, reject) => {
       settings.get('subscriptions').then(subscriptions => {
-        Promise.all(subscriptions.map(neighborhood => {
-          return this._fetchStoriesFromNeighborhood(neighborhood);
+        Promise.all(subscriptions.map(id => {
+          return this._fetchStoriesFromNeighborhoodId(id);
         })).then(storySets => {
-          const allStories = [];
-
-          storySets.forEach(storySet => {
-            allStories.concat(storySet);
-          });
+          const allStories = storySets.reduce((curr, prev) => {
+            return prev.concat(curr);
+          }, []);
 
           resolve(allStories);
         }, reject);
@@ -148,13 +158,15 @@ class Feed {
   }
 
   /**
-   * Fetches all stories from a given neighborhood.
+   * Fetches all stories from a given neighborhood id.
    *
-   * @param {Object} neighborhood
+   * @param {string} id
    * @returns {Promise}
    * @private
    */
-  _fetchStoriesFromNeighborhood(neighborhood) {
+  _fetchStoriesFromNeighborhoodId(id) {
+    const neighborhood = this._getNeighborhoodFromId(id);
+
     debug(`fetching stories from ${neighborhood.friendlyName}...`);
 
     return new Promise((resolve, reject) => {
@@ -211,42 +223,6 @@ class Feed {
   }
 
   /**
-   * Sends notifications for new stories.
-   *
-   * @param {Array} stories
-   * @private
-   */
-  _notifyNewStories(stories) {
-    const numNewStories = stories.length;
-
-    stories.forEach(story => {
-      notifier.notify({
-        id: this._getTitleFromStory(),
-        title: this._getTitleFromStory(story),
-        body: this._getSummaryFromStory(story),
-        link: this._getLinkFromStory(story)
-      });
-    });
-
-    // if (numNewStories === 1) {
-    //   const story = stories[0];
-    //
-    //   notifier.notify({
-    //     title: this._getTitleFromStory(story),
-    //     body: this._getSummaryFromStory(story),
-    //     link: this._getLinkFromStory(story)
-    //   });
-    // } else if (numNewStories > 1) {
-    //   notifier.notify({
-    //     title: `${numNewStories} new stories`,
-    //     body: 'Visit Hoodline.com to read more.',
-    //     id: this._getTitleFromStory(),
-    //     link: 'http://hoodline.com'
-    //   });
-    // }
-  }
-
-  /**
    * Ensures that all stories are unique in case more than one subscribed
    * neighborhood contains the same story.
    *
@@ -280,6 +256,23 @@ class Feed {
     return stories.filter(story => {
       return this._lastUpdatedTime < this._getPublishDateFromStory(story);
     });
+  }
+
+  /**
+   * Gets the neighborhood data from its respective id.
+   *
+   * @param {string} id
+   * @returns {Object} neighborhood
+   * @private
+   */
+  _getNeighborhoodFromId(id) {
+    for (let i = 0; i < neighborhoods.length; i++) {
+      const neighborhood = neighborhoods[i];
+
+      if (id === neighborhood.id) {
+        return neighborhood;
+      }
+    }
   }
 
   /**
@@ -326,6 +319,16 @@ class Feed {
     return story.link[1].$.href;
   }
 }
+
+/**
+ * Event names.
+ *
+ * @enum string
+ * @readonly
+ */
+Feed.Events = {
+  NEW_STORIES: 'new-stories'
+};
 
 /**
  * The polling frequency for the stories fetcher. 15 minutes.
