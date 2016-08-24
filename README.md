@@ -1,4 +1,4 @@
-![Hoodline Mini](./docs/images/Banner.png)
+![Hoodline Mini](https://cdn.rawgit.com/nathanbuchar/hoodline-mini/master/docs/images/Banner.svg)
 
 ## Hoodline Mini
 
