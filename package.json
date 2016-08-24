@@ -2,9 +2,8 @@
   "private": true,
   "scripts": {
     "start": "electron app",
-    "setup": "npm run setup:builder && npm run setup:app",
-    "setup:builder": "npm install && npm run build:frontend",
-    "setup:app": "(cd app && npm run setup)",
+    "setup": "npm install && npm run setup:app",
+    "setup:app": "(cd app && npm run setup) && npm run build:frontend",
     "build:frontend": "gulp build",
     "watch:frontend": "export NODE_ENV=\"development\" && gulp build:watch",
     "build": "npm run build:frontend && build && open -a Finder dist/mac"
