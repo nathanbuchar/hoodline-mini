@@ -51,7 +51,7 @@ class Feed extends EventEmitter {
    */
   _init() {
     this._initLastUpdatedTime();
-    this._initPollingInterval(true);
+    this._initPollingInterval();
   }
 
   /**
@@ -254,7 +254,7 @@ class Feed extends EventEmitter {
    */
   _filterNewArticles(stories) {
     return stories.filter(story => {
-      return this._lastUpdatedTime < this._getPublishDateFromStory(story);
+      return this._lastUpdatedTime < new Date(this._getPublishDateFromStory(story));
     });
   }
 
@@ -317,6 +317,13 @@ class Feed extends EventEmitter {
    */
   _getLinkFromStory(story) {
     return story.link[1].$.href;
+  }
+
+  /**
+   * Public method to check for new stories.
+   */
+  checkForNewStories() {
+    this._fetchNewStories();
   }
 }
 

@@ -202,6 +202,12 @@ class App {
                   link: 'https://github.com/nathanbuchar/hoodline-mini'
                 });
               }
+            },
+            {
+              label: 'Check for new stories…',
+              click() {
+                _this._feed.checkForNewStories();
+              }
             }
           ]
         },
