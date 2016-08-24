@@ -31,8 +31,8 @@
     "compression": "store",
     "files": [
       "**/*",
-      "!**/*.map",
-      "!**/src${/*}"
+      "!assets/+(js|css)/*.map",
+      "!assets/+(js|css)/src${/*}"
     ],
     "mac": {
       "icon": "build/Icon.icns",
