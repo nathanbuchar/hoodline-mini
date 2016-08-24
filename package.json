@@ -31,7 +31,9 @@
     "productName": "Hoodline Mini",
     "compression": "store",
     "files": [
-      "*/**"
+      "**/*",
+      "!**/*.map",
+      "!**/src${/*}"
     ],
     "mac": {
       "icon": "build/Icon.icns",
