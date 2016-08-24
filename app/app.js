@@ -196,7 +196,7 @@ class App {
             {
               label: 'Send test notification…',
               click() {
-                this._notifier.notify({
+                _this._notifier.notify({
                   title: 'Test',
                   body: 'This is a test notification.',
                   link: 'https://github.com/nathanbuchar/hoodline-mini'

@@ -43,20 +43,7 @@ class Notifier {
    * @param {string} link
    */
   notify(options) {
-    if (!Notifier.Window) {
-      Notifier.Window = new BrowserWindow({
-        focusable: false,
-        show: false
-      });
-
-      Notifier.Window.webContents.once('did-finish-load', () => {
-        this.notify.call(this, options);
-      });
-
-      Notifier.Window.loadURL(Notifier.PathToWindow);
-    } else {
-      Notifier.Window.webContents.send('notify', options);
-    }
+    this._window.webContents.send('notify', options);
   }
 }
 
